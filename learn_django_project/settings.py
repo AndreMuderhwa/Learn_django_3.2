@@ -51,6 +51,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'learn_django_project.urls'
+LOGIN_URL='/login'
 
 TEMPLATES = [
     {
