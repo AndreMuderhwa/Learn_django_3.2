@@ -6,17 +6,18 @@
 
     {% if not created %}
 
-    {{form.as_p}}
+   
 
     <div style="margin-top: 30px;">
         <form action="/articles/create/" method="POST">
             {% csrf_token %}
-            <div style="margin-top: 10px;">
+            {% comment %} <div style="margin-top: 10px;">
                 <input type="text" name="title" placeholder="title"/>
             </div>
             <div style="margin-top: 10px;">
             <textarea name="content" placeholder="content"></textarea> 
-            </div>
+            </div> {% endcomment %}
+            {{form.as_p}}
             
             <button type="submit">Create article</button>
 
