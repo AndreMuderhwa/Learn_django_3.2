@@ -23,6 +23,8 @@ context={
     "title":article_obj.title,
     "content":article_obj.content
 }
+
+
 tmp =get_template("home-view.html")
 tmpl_string=tmp.render(context=context)
 

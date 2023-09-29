@@ -1,8 +1,7 @@
-"""
-URL configuration for learn_django_project project.
+"""tryDjangoProject URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.2/topics/http/urls/
+    https://docs.djangoproject.com/en/3.2/topics/http/urls/
 Examples:
 Function views
     1. Add an import:  from my_app import views
@@ -37,5 +36,5 @@ urlpatterns = [
     path('articles/<int:id>/',article_detail_view),
     path('articles/',article_search_view),
     path('articles/create/',article_create_view),
-    path('admin/', admin.site.urls)
+    path('admin/', admin.site.urls),
 ]
