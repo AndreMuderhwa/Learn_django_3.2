@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.utils.text import slugify
 from django.db.models.signals import pre_save,post_save
+from django.urls import reverse
 import random
 from .utils import slugify_instance_title
 
@@ -12,7 +13,10 @@ class Article(models.Model):
     content=models.TextField()  
     timestamp=models.DateTimeField(null=True,auto_now_add=True)
     updated=models.DateField(null=True,auto_now=True)
-    publish=models.DateTimeField(auto_now_add=False,auto_now=False,default=timezone.now)  
+    publish=models.DateTimeField(auto_now_add=False,auto_now=False,default=timezone.now) 
+
+    def get_absolute_url(self):
+         return reverse("article-detail",kwargs={"slug":self.slug})
 
     def save(self,*args, **kwargs):
         # if self.slug is None:
