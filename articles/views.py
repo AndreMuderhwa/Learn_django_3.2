@@ -1,13 +1,18 @@
 from django.shortcuts import render
 from . models import Article
 from django.contrib.auth.decorators import login_required
+from django.http import Http404
 from . forms import ArticleForm
 # Create your views here.
 
-def article_detail_view(request,id=None):
+def article_detail_view(request,slug=None):
     article_obj=None
-    if id is not None:
-        article_obj=Article.objects.get(id=id)
+    if slug is not None:
+        try:
+            article_obj=Article.objects.get(slug=slug)
+        except:
+            raise Http404
+    
     context={
         "object":article_obj
     }
