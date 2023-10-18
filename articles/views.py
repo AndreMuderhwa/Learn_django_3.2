@@ -2,6 +2,7 @@ from django.shortcuts import render
 from . models import Article
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
+from django.db.models import Q
 from . forms import ArticleForm
 # Create your views here.
 
@@ -10,6 +11,10 @@ def article_detail_view(request,slug=None):
     if slug is not None:
         try:
             article_obj=Article.objects.get(slug=slug)
+        except Article.DoesNotExist:
+            raise Http404
+        except Article.MultipleObjectsReturned:
+            raise Http404
         except:
             raise Http404
     
@@ -19,18 +24,15 @@ def article_detail_view(request,slug=None):
     return render(request,"articles/detail.html",context=context)
 
 def article_search_view(request):
-    query_dict=request.GET
-
-    try:
-        query=int(query_dict.get('q'))
-    except:
-        query=None
-
-    article_obj=None
-    if query is not None:
-        article_obj=Article.objects.get(id=query)
+    query=request.GET.get('q')
+    # qs=Article.objects.all()
+    # article_obj=None
+    # if query is not None:
+    #     lookups=Q(title__icontains=query) | Q(content__icontains=query)
+        # qs=Article.objects.filter(lookups)
+    qs=Article.objects.filter(title__icontains='t').search(query=query)
     context={
-        "object":article_obj
+        "object_list":qs
     }
     return render(request,"articles/search.html",context=context)
 
