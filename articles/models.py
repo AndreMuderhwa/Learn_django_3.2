@@ -4,9 +4,13 @@ from django.utils.text import slugify
 from django.db.models.signals import pre_save,post_save
 import random
 from django.db.models import Q
+from django.conf import settings
 from .utils import slugify_instance_title
 
 # Create your models here.
+
+User=settings.AUTH_USER_MODEL
+
 class ArticleQuerySet(models.QuerySet):
      def search(self,query=None):
           if query is None or query=="":
@@ -27,6 +31,8 @@ class ArticleManager(models.Manager):
 
 
 class Article(models.Model):
+
+    user=models.ForeignKey(User,blank=True,null=True, on_delete=models.SET_NULL)
     title=models.CharField(max_length=120)
     slug=models.SlugField(unique=True, null=True,blank=True)
     content=models.TextField()  
