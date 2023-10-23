@@ -26,7 +26,7 @@ class RecipeIngredientInline(admin.StackedInline):
     model=RecipeIngredient
     extra=0
     # fields=['name','quantity','unit','directions']
-    readonly_fields=['quantity_as_float','as_mks','as_imperial','to_ounces']
+    readonly_fields=['quantity_as_float','as_mks','as_imperial'] #we can add 'to_ounces' if we want to make the conversion
 
 class RecipeAdmin(admin.ModelAdmin):
     inlines=[RecipeIngredientInline]

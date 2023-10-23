@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.urls import reverse
 import pint
 from .validators import validate_unit_of_measure
 from .utils import number_str_to_float
@@ -13,21 +14,25 @@ class Recipe(models.Model):
     updated=models.DateTimeField(auto_now=True)
     active=models.BooleanField(default=True)
 
+    def get_absolute_url(self):
+        return  reverse("recipes:detail",kwargs={"id": self.id})
+
 
 class RecipeIngredient(models.Model):
     recipe=models.ForeignKey(Recipe,on_delete=models.CASCADE)
     name=models.CharField(max_length=220)
     description=models.TextField(blank=True,null=True)
     quantity=models.CharField(max_length=50)
-
     quantity_as_float=models.FloatField(blank=True,null=True)
-
-
     unit=models.CharField(max_length=50, validators=[validate_unit_of_measure])
     directions=models.TextField(blank=True,null=True)
     timestamp=models.DateTimeField(auto_now_add=True)
     updated=models.DateTimeField(auto_now=True)
     active=models.BooleanField(default=True)
+
+    def get_absolute_url(self):
+        return self.recipe.get_absolute_url()
+        
 
 
     def convert_to_system(self,system="mks"):
@@ -48,9 +53,9 @@ class RecipeIngredient(models.Model):
         measurement=self.convert_to_system(system="imperial")
         return measurement.to_base_units()
 
-    def to_ounces(self):
-        m=self.convert_to_system()
-        return m.to('ounces')
+    # def to_ounces(self):
+    #     m=self.convert_to_system()
+    #     return m.to('ounces')
 
     def save(self,*args, **kwargs):
         qty=self.quantity

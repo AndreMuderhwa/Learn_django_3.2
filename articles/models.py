@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.utils.text import slugify
+from django.urls import reverse
 from django.db.models.signals import pre_save,post_save
 import random
 from django.db.models import Q
@@ -41,6 +42,10 @@ class Article(models.Model):
     publish=models.DateTimeField(auto_now_add=False,auto_now=False,default=timezone.now)  
 
     objects=ArticleManager()
+
+    def get_absolute_url(self):
+        return reverse("articles:detail", kwargs={"slug": self.slug})
+    
 
     def save(self,*args, **kwargs):
         # if self.slug is None:
