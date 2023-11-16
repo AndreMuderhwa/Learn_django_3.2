@@ -43,8 +43,11 @@ class Article(models.Model):
 
     objects=ArticleManager()
 
+    
     def get_absolute_url(self):
         return reverse("articles:detail", kwargs={"slug": self.slug})
+    
+     
     
 
     def save(self,*args, **kwargs):
@@ -81,7 +84,7 @@ pre_save.connect(article_pre_save,sender=Article)
 
 def article_post_save(sender,instance,created,*args, **kwargs):
     # print("post_save")
-    print(args,kwargs)
+#     print(args,kwargs)
     if created:
          slugify_instance_title(instance, save=True)
 

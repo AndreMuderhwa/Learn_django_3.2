@@ -15,7 +15,8 @@ class Recipe(models.Model):
     active=models.BooleanField(default=True)
 
     def get_absolute_url(self):
-        return  reverse("recipes:detail",kwargs={"id": self.id})
+        return reverse("recipes:detail", kwargs={"id": self.id})
+    
 
 
 class RecipeIngredient(models.Model):
@@ -30,8 +31,10 @@ class RecipeIngredient(models.Model):
     updated=models.DateTimeField(auto_now=True)
     active=models.BooleanField(default=True)
 
+    
     def get_absolute_url(self):
         return self.recipe.get_absolute_url()
+    
         
 
 

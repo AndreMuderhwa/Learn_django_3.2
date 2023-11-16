@@ -15,20 +15,21 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from .views import home_view
-from articles.views import(
-    article_create_view,
-    article_search_view,
-    article_detail_view
-) 
+# from .views import home_view
+# from articles.views import(
+#     article_create_view,
+#     article_search_view,
+#     article_detail_view
+# ) 
 from accounts.views import (
     login_view,
     logout_view,
     register_view
 )
 
+
 urlpatterns = [
-    path('',home_view),
+    # path('',home_view),
     path('pantry/recipes/',include('recipes.urls')),
     path('articles/',include('articles.urls')),
     path('login/',login_view),
