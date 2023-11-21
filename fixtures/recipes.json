@@ -1,0 +1,153 @@
+[
+{
+    "model": "recipes.recipe",
+    "pk": 1,
+    "fields": {
+        "user": 1,
+        "name": "Riz- haricot",
+        "description": "plat incluant le riz et le haricot",
+        "directions": "directions is only used for recipes",
+        "timestamp": "2023-10-21T08:39:57.572Z",
+        "updated": "2023-11-16T08:48:52.543Z",
+        "active": true
+    }
+},
+{
+    "model": "recipes.recipe",
+    "pk": 2,
+    "fields": {
+        "user": 1,
+        "name": "new RECPE",
+        "description": "Cool",
+        "directions": "cooll",
+        "timestamp": "2023-11-16T07:24:52.679Z",
+        "updated": "2023-11-21T09:30:27.199Z",
+        "active": true
+    }
+},
+{
+    "model": "recipes.recipe",
+    "pk": 3,
+    "fields": {
+        "user": 1,
+        "name": "New HTMX",
+        "description": "",
+        "directions": "",
+        "timestamp": "2023-11-21T12:52:35.453Z",
+        "updated": "2023-11-21T13:47:15.268Z",
+        "active": true
+    }
+},
+{
+    "model": "recipes.recipeingredient",
+    "pk": 1,
+    "fields": {
+        "recipe": 1,
+        "name": "grillled chicken pasta",
+        "description": "",
+        "quantity": "3 1/2",
+        "quantity_as_float": 3.5,
+        "unit": "pounds",
+        "directions": "",
+        "timestamp": "2023-10-21T10:31:36.992Z",
+        "updated": "2023-11-16T08:48:52.793Z",
+        "active": true
+    }
+},
+{
+    "model": "recipes.recipeingredient",
+    "pk": 2,
+    "fields": {
+        "recipe": 1,
+        "name": "Riz- haricot",
+        "description": null,
+        "quantity": "3",
+        "quantity_as_float": 3.0,
+        "unit": "ounces",
+        "directions": null,
+        "timestamp": "2023-11-16T07:54:59.568Z",
+        "updated": "2023-11-16T08:48:52.898Z",
+        "active": true
+    }
+},
+{
+    "model": "recipes.recipeingredient",
+    "pk": 3,
+    "fields": {
+        "recipe": 1,
+        "name": "Riz- haricot",
+        "description": null,
+        "quantity": "3",
+        "quantity_as_float": 3.0,
+        "unit": "ounces",
+        "directions": null,
+        "timestamp": "2023-11-16T07:56:16.174Z",
+        "updated": "2023-11-16T08:48:52.998Z",
+        "active": true
+    }
+},
+{
+    "model": "recipes.recipeingredient",
+    "pk": 4,
+    "fields": {
+        "recipe": 2,
+        "name": "grillled chicken pasta",
+        "description": null,
+        "quantity": "1",
+        "quantity_as_float": 1.0,
+        "unit": "pound",
+        "directions": null,
+        "timestamp": "2023-11-21T09:30:17.258Z",
+        "updated": "2023-11-21T09:30:17.259Z",
+        "active": true
+    }
+},
+{
+    "model": "recipes.recipeingredient",
+    "pk": 5,
+    "fields": {
+        "recipe": 2,
+        "name": "grillled chicken pasta",
+        "description": null,
+        "quantity": "1",
+        "quantity_as_float": 1.0,
+        "unit": "pound",
+        "directions": null,
+        "timestamp": "2023-11-21T09:30:27.356Z",
+        "updated": "2023-11-21T09:30:27.357Z",
+        "active": true
+    }
+},
+{
+    "model": "recipes.recipeingredient",
+    "pk": 6,
+    "fields": {
+        "recipe": 3,
+        "name": "Pasta noddles",
+        "description": null,
+        "quantity": "1",
+        "quantity_as_float": 1.0,
+        "unit": "pound",
+        "directions": null,
+        "timestamp": "2023-11-21T12:53:39.181Z",
+        "updated": "2023-11-21T13:47:15.415Z",
+        "active": true
+    }
+},
+{
+    "model": "recipes.recipeingredient",
+    "pk": 7,
+    "fields": {
+        "recipe": 3,
+        "name": "noddles",
+        "description": null,
+        "quantity": "4",
+        "quantity_as_float": 4.0,
+        "unit": "ounces",
+        "directions": null,
+        "timestamp": "2023-11-21T13:47:15.530Z",
+        "updated": "2023-11-21T13:47:15.530Z",
+        "active": true
+    }
+}
+]
