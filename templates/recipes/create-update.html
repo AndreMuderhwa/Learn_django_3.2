@@ -18,6 +18,14 @@
 
 <div style="margin-top: 30px;">
     {% include 'recipes/partials/forms.html' %}
+
+    <h3>Ingredients</h3>
+
+    {% for ingredient in object.get_ingredient_children %}
+
+        {% include 'recipes/partials/ingredient-inline.html' with object=ingredient %}
+
+    {% endfor %}
 </div>
 <script>
         
