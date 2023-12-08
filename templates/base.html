@@ -25,10 +25,7 @@
 <body>
 
     <h1>Hello World for base</h1>
-    <form action="/articles/" method="GET">
-        <input type="text" name="q"/>
-        <input type="submit"/>
-    </form>
+    {% include 'search/search-form.html' %}
     <hr>
     {% block content %}
         
