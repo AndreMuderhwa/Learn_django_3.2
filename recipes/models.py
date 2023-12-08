@@ -14,7 +14,12 @@ class RecipeQuerySet(models.QuerySet):
      def search(self,query=None):
           if query is None or query=="":
                return self.none()
-          lookups=Q(name__icontains=query) | Q(description__icontains=query)
+          lookups=(
+              Q(name__icontains=query) | 
+              Q(description__icontains=query) |
+              Q(directions__icontains=query) 
+
+              )
           return self.filter(lookups)
           
 class RecipeManager(models.Manager):
@@ -22,10 +27,6 @@ class RecipeManager(models.Manager):
           return RecipeQuerySet(self.model, using=self._db)
      
      def search(self,query=None):
-        #   if query is None or query=="":
-        #        return self.get_queryset().none()
-        #   lookups=Q(title__icontains=query) | Q(content__icontains=query)
-        #   return self.get_queryset().filter(lookups)
         return self.get_queryset().search(query=query)
 
 
@@ -47,7 +48,7 @@ class Recipe(models.Model):
     updated=models.DateTimeField(auto_now=True)
     active=models.BooleanField(default=True)
 
-    objects=RecipeQuerySet()
+    objects=RecipeManager()
 
     def get_absolute_url(self):
         return reverse("recipes:detail", kwargs={"id": self.id})
@@ -63,6 +64,10 @@ class Recipe(models.Model):
     
     def get_ingredient_children(self):
         return self.recipeingredient_set.all()
+    
+    @property
+    def title(self):
+         return self.name
 
 
 class RecipeIngredient(models.Model):

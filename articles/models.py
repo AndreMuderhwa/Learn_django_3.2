@@ -41,6 +41,10 @@ class Article(models.Model):
     updated=models.DateField(null=True,auto_now=True)
     publish=models.DateTimeField(auto_now_add=False,auto_now=False,default=timezone.now)  
 
+    @property
+    def name(self):
+         return self.title
+
     objects=ArticleManager()
 
     

@@ -9,6 +9,11 @@ Searched for {{ request.GET.q }} under {{ request.GET.type | title }}s
 
     <li>No results found </li>
 
-
-
 {% endfor %}
+
+{% if request.htmx %}
+
+<a href='/search/?q={{ request.GET.q }}&type={{ request.GET.type }}'>View All </a>
+
+
+{% endif %}
