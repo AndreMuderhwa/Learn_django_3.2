@@ -5,6 +5,44 @@ import pint
 from .validators import validate_unit_of_measure
 from .utils import number_str_to_float
 # Create your models here.
+
+
+
+
+
+from .utils import slugify_instance_title
+
+
+User=settings.AUTH_USER_MODEL
+
+class ArticleQuerySet(models.QuerySet):
+     def search(self,query=None):
+          if query is None or query=="":
+               return self.none()
+          lookups=Q(title__icontains=query) | Q(content__icontains=query)
+          return self.filter(lookups)
+          
+class ArticleManager(models.Manager):
+     def get_queryset(self):
+          return ArticleQuerySet(self.model, using=self._db)
+     
+     def search(self,query=None):
+        #   if query is None or query=="":
+        #        return self.get_queryset().none()
+        #   lookups=Q(title__icontains=query) | Q(content__icontains=query)
+        #   return self.get_queryset().filter(lookups)
+        return self.get_queryset().search(query=query)
+
+
+
+
+
+
+
+
+
+
+
 class Recipe(models.Model):
     user=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     name=models.CharField(max_length=220)

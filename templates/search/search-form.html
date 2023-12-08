@@ -1,6 +1,8 @@
 <div>
 <form action="/search/" method="GET">
-    <input type="text" name="q" value="{{ request.GET.q }}" hx-get="/search/" hx-trigger="keyup changed delay:200ms" hx-include='#search-type'/>
+    <input type="text" name="q" value="{{ request.GET.q }}" hx-get="/search/" 
+        hx-trigger="keyup changed delay:200ms" hx-include='#search-type' hx-target='#typeahead-results'/>
+        
     <select name="type" id='search-type'>
         
         {% if request.GET.type == 'article' %}
@@ -20,7 +22,7 @@
 </form>
         
     <div id='typeahead-results'>
-        
+
 
     </div>
 
