@@ -2,29 +2,24 @@ from django.db import models
 from django.conf import settings
 from django.urls import reverse
 import pint
+from django.db.models import Q
 from .validators import validate_unit_of_measure
 from .utils import number_str_to_float
 # Create your models here.
 
 
-
-
-
-from .utils import slugify_instance_title
-
-
 User=settings.AUTH_USER_MODEL
 
-class ArticleQuerySet(models.QuerySet):
+class RecipeQuerySet(models.QuerySet):
      def search(self,query=None):
           if query is None or query=="":
                return self.none()
-          lookups=Q(title__icontains=query) | Q(content__icontains=query)
+          lookups=Q(name__icontains=query) | Q(description__icontains=query)
           return self.filter(lookups)
           
-class ArticleManager(models.Manager):
+class RecipeManager(models.Manager):
      def get_queryset(self):
-          return ArticleQuerySet(self.model, using=self._db)
+          return RecipeQuerySet(self.model, using=self._db)
      
      def search(self,query=None):
         #   if query is None or query=="":
@@ -51,6 +46,8 @@ class Recipe(models.Model):
     timestamp=models.DateTimeField(auto_now_add=True)
     updated=models.DateTimeField(auto_now=True)
     active=models.BooleanField(default=True)
+
+    objects=RecipeQuerySet()
 
     def get_absolute_url(self):
         return reverse("recipes:detail", kwargs={"id": self.id})
