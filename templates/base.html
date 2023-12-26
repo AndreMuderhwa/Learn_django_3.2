@@ -1,25 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/htmx.org@1.9.8"></script>
-    <style>
-        .htmx-indicator {
-            display:none;
-        }
-        .htmx-request .htmx-indicator{
-            display: inline;
-        }
-        .htmx-inverted-indicator{
-            display: inline;
-        }
-        .htmx-request .htmx-inverted-indicator{
-            display:none;
-
-        }
-
-    </style>
+    <link rel="stylesheet" href='{% static "recipes/recipes-htmx.css" %}' />
     <title>Base</title>
 </head>
 <body>
@@ -34,5 +20,11 @@
    <footer>
         <p>Powered by Andrew M.S</p>
    </footer>  
+
+   <script>
+        document.body.addEventListener("htmx:configRequest", (event)=>{
+            event.detail.headers['X-CSRFToken']='{{ csrf_token }}'
+        })
+   </script>
 </body>
 </html>
