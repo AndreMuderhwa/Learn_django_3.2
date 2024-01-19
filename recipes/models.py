@@ -73,6 +73,13 @@ class Recipe(models.Model):
          return self.name
 
 
+class RecipeIngredientImage(models.Model):
+    recipe=models.ForeignKey(Recipe,on_delete=models.CASCADE)
+    image=models.FileField(upload_to="recipes/")
+
+
+
+
 class RecipeIngredient(models.Model):
     recipe=models.ForeignKey(Recipe,on_delete=models.CASCADE)
     name=models.CharField(max_length=220)

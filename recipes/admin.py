@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth import get_user_model
-from .models import Recipe,RecipeIngredient
+from .models import Recipe,RecipeIngredient,RecipeIngredientImage
 # Register your models here.
 
 #TabularInline,StackedInline => sont des types d'affichages
@@ -36,3 +36,4 @@ class RecipeAdmin(admin.ModelAdmin):
 
 admin.site.register(Recipe,RecipeAdmin)
 admin.site.register(RecipeIngredient)
+admin.site.register(RecipeIngredientImage)
