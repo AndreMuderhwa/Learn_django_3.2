@@ -204,6 +204,13 @@ def recipe_ingredient_image_upload_view(request,parent_id):
             data['recipe_id']=parent_id
             new_objs.append(RecipeIngredient(**data))
         RecipeIngredient.objects.bulk_create(new_objs)
+        success_url= parent_obj.get_edit_url()
+        if request.htmx:
+            headers={
+                'HX-Redirect':success_url
+            }
+            return HttpResponse("Success", headers=headers)
+        return redirect(success_url)
             
 
     return render(request,template_name,{"form":form})

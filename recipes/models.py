@@ -65,10 +65,14 @@ class Recipe(models.Model):
         return reverse("recipes:update", kwargs={"id": self.id})
     
     def get_delete_url(self):
-        return reverse("recipes:delete",kwargs={"id":self.id})
+        return reverse("recipes:recipe-ingredient-image-upload",kwargs={"parent_id":self.id})
 
     def get_ingredient_children(self):
         return self.recipeingredient_set.all()
+    
+    def get_image_upload_url(self):
+        return reverse("recipes:delete",kwargs={"id":self.id})
+
     
     @property
     def title(self):
@@ -87,6 +91,9 @@ class RecipeIngredientImage(models.Model):
     recipe=models.ForeignKey(Recipe,on_delete=models.CASCADE)
     image=models.ImageField(upload_to=recipe_ingredient_image_upload_handler)
     extracted=models.JSONField(blank=True,null=True)
+
+    
+
 
 
 
