@@ -28,7 +28,6 @@ def parse_paragraph_to_recipe_line(paragraph:str):
             current_str +=f" {line}"
     return results
 
-#results=parse_paragraph_to_recipe_line(og)  # og is the text to format
 
 
 def convert_to_qty_units(results: List[str]):
@@ -67,6 +66,12 @@ def convert_to_qty_units(results: List[str]):
             "other":" ".join(other)
         }
         dataset.append(data)
+    return dataset
+
+
+
+results=parse_paragraph_to_recipe_line(og)
+dataset=convert_to_qty_units(results)
 
 
 #print(dataset)
