@@ -171,9 +171,15 @@ def recipe_ingredient_update_hx_view(request,parent_id=None,id=None):
 
 
 def recipe_ingredient_image_upload_view(request,parent_id):
+    try:
+        parent_obj=Recipe.objects.get(id=parent_id,user=request.user)
+    except:
+        parent_obj=None
+    if parent_obj is None:
+        raise Http404
     form=RecipeIngredientImageForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         obj=form.save(commit=False)
-        obj.recipe=parent_id
+        obj.recipe=parent_obj
         obj.save()
     return render(request,"image-form.html",{"form":form})

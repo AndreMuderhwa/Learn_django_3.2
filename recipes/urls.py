@@ -23,7 +23,7 @@ urlpatterns = [
 
     path("<int:parent_id>/ingredient/<int:id>/delete/",recipe_ingredient_delete_view),
 
-    path("<int:parent_id>/image-uplaod/",recipe_ingredient_image_upload_view, name="ingredient-delete"),
+    path("<int:parent_id>/image-upload/",recipe_ingredient_image_upload_view, name="ingredient-delete"),
 
     path("hx/<int:parent_id>/ingredient/",recipe_ingredient_update_hx_view, name="hx-ingredient-create"),
     path("<int:id>/",recipe_detail_view, name="detail")
