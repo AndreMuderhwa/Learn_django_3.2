@@ -79,13 +79,13 @@ class Recipe(models.Model):
 def recipe_ingredient_image_upload_handler(instance,filename):
     fpath=pathlib.Path(filename)
     new_fname=str(uuid.uuid1())
-    f"recipes/{new_fname}{fpath.suffix}"
+    return f"recipes/ingredient/{new_fname}{fpath.suffix}" 
  
 
 
 class RecipeIngredientImage(models.Model):
     recipe=models.ForeignKey(Recipe,on_delete=models.CASCADE)
-    image=models.ImageField(upload_to="recipes/")
+    image=models.ImageField(upload_to=recipe_ingredient_image_upload_handler)
 
 
 

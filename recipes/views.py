@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.forms.models import modelformset_factory
 from django.urls import reverse
 from .models import Recipe,RecipeIngredient
-from .forms import RecipeForm,RecipeIngredientForm
+from .forms import RecipeForm,RecipeIngredientForm,RecipeIngredientImageForm
 
 # Create your views here.
 @login_required
@@ -168,3 +168,12 @@ def recipe_ingredient_update_hx_view(request,parent_id=None,id=None):
         return render(request,"recipes/partials/ingredient-inline.html",context)
 
     return render(request,"recipes/partials/ingredient-form.html",context)
+
+
+def recipe_ingredient_image_upload_view(request,parent_id):
+    form=RecipeIngredientImageForm(request.POST or None, request.FILES or None)
+    if form.is_valid():
+        obj=form.save(commit=False)
+        obj.recipe=parent_id
+        obj.save()
+    return render(request,"image-form.html",{"form":form})
