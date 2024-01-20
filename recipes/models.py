@@ -95,7 +95,7 @@ class RecipeIngredient(models.Model):
     recipe=models.ForeignKey(Recipe,on_delete=models.CASCADE)
     name=models.CharField(max_length=220)
     description=models.TextField(blank=True,null=True)
-    quantity=models.CharField(max_length=50)
+    quantity=models.CharField(max_length=50, blank=True, null=True)
     quantity_as_float=models.FloatField(blank=True,null=True)
     unit=models.CharField(max_length=50, validators=[validate_unit_of_measure])
     directions=models.TextField(blank=True,null=True)
@@ -130,7 +130,7 @@ class RecipeIngredient(models.Model):
         if self.quantity_as_float is None:
             return None
         ureg=pint.UnitRegistry(system=system)
-        measurement=self.quantity_as_float * ureg[self.unit]
+        measurement=self.quantity_as_float * ureg[self.unit.lower()]
         return measurement
     
 
