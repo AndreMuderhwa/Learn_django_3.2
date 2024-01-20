@@ -1,3 +1,5 @@
+import pathlib
+import uuid
 from django.db import models
 from django.conf import settings
 from django.urls import reverse
@@ -71,6 +73,14 @@ class Recipe(models.Model):
     @property
     def title(self):
          return self.name
+
+
+
+def recipe_ingredient_image_upload_handler(instance,filename):
+    fpath=pathlib.Path(filename)
+    new_fname=str(uuid.uuid1())
+    f"recipes/{new_fname}{fpath.suffix}"
+ 
 
 
 class RecipeIngredientImage(models.Model):
