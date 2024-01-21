@@ -65,7 +65,7 @@ class Recipe(models.Model):
         return reverse("recipes:update", kwargs={"id": self.id})
     
     def get_delete_url(self):
-        return reverse("recipes:recipe-ingredient-image-upload",kwargs={"parent_id":self.id})
+        return reverse("recipes:delete",kwargs={"id":self.id})
 
     def get_ingredient_children(self):
         return self.recipeingredient_set.all()
