@@ -51,6 +51,13 @@ class MealManager(models.Manager):
      def by_user(self,user):
          return self.get_queryset().by_user(user)
      
+     def get_queue(self,user,prefetch_ingredient=False):
+         qs=self.get_queryset().by_user(user).pending()
+         if prefetch_ingredient:
+             return qs.prefetch_related("recipe__recipeingredient")
+         return qs
+         
+     
      def toggle_in_queue(self, user_id,recipe_id):
          qs=self.get_queryset().all().by_user_id(user_id)
          already_queued=qs.in_queue(recipe_id)
