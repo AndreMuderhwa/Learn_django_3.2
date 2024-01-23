@@ -7,10 +7,10 @@ import random
 from django.db.models import Q
 from django.conf import settings
 from .utils import slugify_instance_title
-from meals.signals import (
-     meal_added,meal_removed
-)
-from meals.utils import generate_meal_queue_total
+# from meals.signals import (
+#      meal_added,meal_removed
+# )
+# from meals.utils import generate_meal_queue_total
 # Create your models here.
 
 User=settings.AUTH_USER_MODEL
