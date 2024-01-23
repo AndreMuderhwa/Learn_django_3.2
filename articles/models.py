@@ -7,7 +7,10 @@ import random
 from django.db.models import Q
 from django.conf import settings
 from .utils import slugify_instance_title
-
+from meals.signals import (
+     meal_added,meal_removed
+)
+from meals.utils import generate_meal_queue_total
 # Create your models here.
 
 User=settings.AUTH_USER_MODEL
@@ -93,3 +96,16 @@ def article_post_save(sender,instance,created,*args, **kwargs):
          slugify_instance_title(instance, save=True)
 
 post_save.connect(article_post_save,sender=Article)
+
+# def meal_added_rec(sender, instance,*args, **kwargs):
+#      #print("Added", *args, **kwargs)
+#      user=instance.user
+#      data=generate_meal_queue_total(user)
+#      print(data)
+
+# meal_added.connect(meal_added_rec)
+
+# def meal_removed_rec(*args, **kwargs):
+#      print("Removed", *args, **kwargs)
+
+# meal_removed.connect(meal_removed_rec)
