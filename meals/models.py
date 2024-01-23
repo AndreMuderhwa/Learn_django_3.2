@@ -99,5 +99,13 @@ class Meal(models.Model):
     objects=MealManager()
 
 def meal_post_save(sender,instance,created,*args, **kwargs):
-    pass
+    if instance.status != instance.prev_status:
+        if instance.status==MealStatus.PENDING:
+            print("Send a meal added signal")
+        if instance.status == MealStatus.ABORTED:
+            print("Send a meal removed signal")
+        instance.prev_status=instance.status
+        instance.save()
+
+
 post_save.connect(meal_post_save)
