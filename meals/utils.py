@@ -8,17 +8,15 @@ j=User.objects.first()
 
 
 def generate_meal_queue_total(user):
-    queue=Meal.objects.by_user(user).pending().prefetch_related('recipe__recipeingredient')
+    queue=Meal.objects.get_queue(user,prefetch_ingredient=True)
     ids=queue.values_list("recipe__recipeingredient__id", flat=True)
     
     qs=RecipeIngredient.objects.filter(id__in=ids) 
 
-    data=qs.values("name","unit").annotate(total=Sum("quantity_as_float"))
-    return data
 
-for d in data:
-    print(d)
+    return qs.values("name","unit").annotate(total=Sum("quantity_as_float"))
 
+  
 
 
 
